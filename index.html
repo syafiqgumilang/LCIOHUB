@@ -100,6 +100,49 @@
       to   { background-position: 60px 60px, 90px 90px; }
     }
 
+    /* ── Background Watermark ── */
+    .bg-watermark {
+      position: fixed;
+      top: 50%;
+      right: -4vw;
+      transform: translateY(-50%);
+      width: 48vw;
+      max-width: 640px;
+      min-width: 320px;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.08;
+      filter: drop-shadow(0 0 35px rgba(0, 0, 0, 0.5));
+      animation: watermarkFloat 24s ease-in-out infinite alternate;
+      user-select: none;
+    }
+
+    .bg-watermark img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    @keyframes watermarkFloat {
+      0% {
+        transform: translateY(-50%) rotate(0deg) scale(1);
+      }
+      50% {
+        transform: translateY(-53%) rotate(2deg) scale(1.03);
+      }
+      100% {
+        transform: translateY(-47%) rotate(-1.5deg) scale(0.97);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .bg-watermark {
+        right: -15vw;
+        width: 75vw;
+        opacity: 0.05;
+      }
+    }
+
     /* ── Layout wrapper ── */
     .container {
       position: relative;
@@ -376,6 +419,9 @@
 </head>
 <body>
   <div class="particles" aria-hidden="true"></div>
+  <div class="bg-watermark" aria-hidden="true">
+    <img src="logo-bg.png" alt="" />
+  </div>
 
   <main class="container">
 
