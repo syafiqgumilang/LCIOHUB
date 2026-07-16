@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LCIOHUB — Language Center Untirta</title>
+  <meta name="description" content="Pusat tautan resmi Language Center & International Office Universitas Sultan Ageng Tirtayasa." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Reset & base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue:   #004aad;
+      --navy:   #002f6d;
+      --amber:  #ff9d00;
+      --cyan:   #5de0e6;
+      --white:  #ffffff;
+      --card-bg: rgba(255,255,255,0.07);
+      --card-border: rgba(93,224,230,0.18);
+      --radius: 16px;
+      --icon-size: 48px;
+    }
+
+    html, body {
+      min-height: 100%;
+      font-family: 'Lato', sans-serif;
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ── Animated gradient background ── */
+    body {
+      background: linear-gradient(135deg, #002f6d 0%, #004aad 40%, #0068cc 70%, #004aad 100%);
+      background-size: 400% 400%;
+      animation: gradientShift 14s ease infinite;
+      position: relative;
+    }
+
+    @keyframes gradientShift {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* floating orbs */
+    body::before,
+    body::after {
+      content: '';
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+      animation: float 18s ease-in-out infinite;
+      filter: blur(80px);
+      opacity: 0.22;
+    }
+
+    body::before {
+      width: 520px; height: 520px;
+      background: var(--cyan);
+      top: -120px; left: -120px;
+      animation-duration: 20s;
+    }
+
+    body::after {
+      width: 380px; height: 380px;
+      background: var(--amber);
+      bottom: -100px; right: -80px;
+      animation-duration: 16s;
+      animation-delay: -6s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33%       { transform: translate(30px, -40px) scale(1.05); }
+      66%       { transform: translate(-20px, 30px) scale(0.97); }
+    }
+
+    /* extra subtle particle dots via SVG bg */
+    .particles {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(circle, rgba(93,224,230,0.3) 1px, transparent 1px),
+        radial-gradient(circle, rgba(255,157,0,0.2) 1px, transparent 1px);
+      background-size: 60px 60px, 90px 90px;
+      background-position: 0 0, 30px 30px;
+      animation: particleDrift 30s linear infinite;
+      opacity: 0.35;
+    }
+
+    @keyframes particleDrift {
+      from { background-position: 0 0, 30px 30px; }
+      to   { background-position: 60px 60px, 90px 90px; }
+    }
+
+    /* ── Layout wrapper ── */
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 540px;
+      margin: 0 auto;
+      padding: 48px 20px 64px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* ── Header ── */
+    .header {
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .logo-ring {
+      width: 88px; height: 88px;
+      border-radius: 50%;
+      border: 3px solid var(--cyan);
+      background: rgba(0,74,173,0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 18px;
+      box-shadow: 0 0 0 6px rgba(93,224,230,0.12);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .logo-ring:hover {
+      box-shadow: 0 0 0 10px rgba(93,224,230,0.22);
+    }
+
+    .logo-ring svg { width: 50px; height: 50px; }
+
+    .header h1 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 2rem;
+      letter-spacing: 0.04em;
+      color: var(--white);
+      line-height: 1.1;
+    }
+
+    .header h1 span { color: var(--cyan); }
+
+    .header p {
+      margin-top: 6px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 400;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.62);
+      letter-spacing: 0.02em;
+    }
+
+    /* ── Divider ── */
+    .divider {
+      width: 48px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--cyan), var(--amber));
+      border-radius: 99px;
+      margin: 4px 0 12px;
+    }
+
+    /* ── Section label ── */
+    .section-label {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.38);
+      align-self: flex-start;
+      padding-left: 2px;
+      margin-top: 12px;
+      margin-bottom: 2px;
+    }
+
+    /* ── Link card ── */
+    .link-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      width: 100%;
+      padding: 14px 20px 14px 16px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      cursor: pointer;
+      text-decoration: none;
+      color: var(--white);
+      transition:
+        background 0.22s ease,
+        border-color 0.22s ease,
+        transform 0.18s ease,
+        box-shadow 0.22s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* shimmer on hover */
+    .link-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg,
+        transparent 0%,
+        rgba(255,255,255,0.06) 40%,
+        transparent 60%
+      );
+      transform: translateX(-100%);
+      transition: transform 0.5s ease;
+    }
+
+    .link-card:hover::before { transform: translateX(100%); }
+
+    .link-card:hover {
+      background: rgba(255,255,255,0.13);
+      border-color: rgba(93,224,230,0.42);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.22), 0 0 0 1px rgba(93,224,230,0.16);
+    }
+
+    .link-card:active {
+      transform: scale(0.975) translateY(0);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.18);
+      background: rgba(255,255,255,0.16);
+    }
+
+    /* ── Icon circle ── */
+    .icon-wrap {
+      flex-shrink: 0;
+      width: var(--icon-size);
+      height: var(--icon-size);
+      border-radius: 50%;
+      border: 2px solid rgba(93,224,230,0.45);
+      background: rgba(0,74,173,0.38);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.22s ease, background 0.22s ease;
+    }
+
+    .link-card:hover .icon-wrap {
+      border-color: var(--cyan);
+      background: rgba(93,224,230,0.14);
+    }
+
+    .icon-wrap svg {
+      width: 22px; height: 22px;
+      fill: #ffffff;
+      transition: fill 0.22s ease, transform 0.22s ease;
+    }
+
+    .link-card:hover .icon-wrap svg { transform: scale(1.12); }
+
+    /* amber accent icons */
+    .link-card.accent .icon-wrap { border-color: rgba(255,157,0,0.45); }
+    .link-card.accent .icon-wrap svg { fill: #ffffff; }
+    .link-card.accent:hover .icon-wrap {
+      border-color: var(--amber);
+      background: rgba(255,157,0,0.14);
+    }
+
+    /* ── Text block ── */
+    .card-text { flex: 1; min-width: 0; }
+
+    .card-title {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 0.93rem;
+      line-height: 1.3;
+      color: var(--white);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .card-sub {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.48);
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* ── Arrow icon ── */
+    .arrow {
+      flex-shrink: 0;
+      opacity: 0;
+      transform: translateX(-6px);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .link-card:hover .arrow {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .arrow svg { width: 16px; height: 16px; stroke: var(--cyan); fill: none; }
+    .link-card.accent:hover .arrow svg { stroke: var(--amber); }
+
+    /* ── Footer ── */
+    .footer {
+      margin-top: 32px;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.28);
+      text-align: center;
+      letter-spacing: 0.02em;
+    }
+
+    /* ── Ripple effect ── */
+    .ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.18);
+      transform: scale(0);
+      animation: rippleAnim 0.55s ease-out forwards;
+      pointer-events: none;
+    }
+
+    @keyframes rippleAnim {
+      to { transform: scale(4); opacity: 0; }
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 400px) {
+      .header h1 { font-size: 1.65rem; }
+      .card-title { font-size: 0.86rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="particles" aria-hidden="true"></div>
+
+  <main class="container">
+
+    <!-- Header -->
+    <div class="header">
+      <div class="logo-ring" aria-hidden="true">
+        <!-- Globe / language center icon -->
+        <svg viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="25" cy="25" r="20" stroke="#5de0e6" stroke-width="2"/>
+          <ellipse cx="25" cy="25" rx="9" ry="20" stroke="#5de0e6" stroke-width="1.5"/>
+          <line x1="5" y1="25" x2="45" y2="25" stroke="#5de0e6" stroke-width="1.5"/>
+          <line x1="8" y1="16" x2="42" y2="16" stroke="#5de0e6" stroke-width="1"/>
+          <line x1="8" y1="34" x2="42" y2="34" stroke="#5de0e6" stroke-width="1"/>
+        </svg>
+      </div>
+      <h1>LCIO<span>HUB</span></h1>
+      <p>Language Center &amp; International Office — Untirta</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Section: Portal Akademik -->
+    <span class="section-label">Portal Akademik</span>
+
+    <a class="link-card" href="https://simpati.untirta.ac.id/" target="_blank" rel="noopener noreferrer" id="link-ept">
+      <div class="icon-wrap" aria-hidden="true">
+        <!-- Pencil / test icon -->
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+        </svg>
+      </div>
+      <div class="card-text">
+        <div class="card-title">EPT SIMPATI</div>
+        <div class="card-sub">English Proficiency Test — Portal Resmi</div>
+      </div>
+      <div class="arrow" aria-hidden="true">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 8h10M9 4l4 4-4 4"/>
+        </svg>
+      </div>
+    </a>
+
+    <a class="link-card" href="https://pusatbahasa.untirta.ac.id/" target="_blank" rel="noopener noreferrer" id="link-website">
+      <div class="icon-wrap" aria-hidden="true">
+        <!-- Globe icon -->
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+        </svg>
+      </div>
+      <div class="card-text">
+        <div class="card-title">Website Pusat Bahasa</div>
+        <div class="card-sub">pusatbahasa.untirta.ac.id</div>
+      </div>
+      <div class="arrow" aria-hidden="true">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 8h10M9 4l4 4-4 4"/>
+        </svg>
+      </div>
+    </a>
+
+    <!-- Section: Media Sosial -->
+    <span class="section-label">Media Sosial</span>
+
+    <a class="link-card" href="https://www.instagram.com/lcio_untirta/" target="_blank" rel="noopener noreferrer" id="link-ig">
+      <div class="icon-wrap" aria-hidden="true">
+        <!-- Instagram icon -->
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5a4.25 4.25 0 0 0 4.25-4.25v-8.5A4.25 4.25 0 0 0 16.25 3.5h-8.5zM12 7a5 5 0 1 1 0 10A5 5 0 0 1 12 7zm0 1.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7zm5.25-2.25a.875.875 0 1 1 0 1.75.875.875 0 0 1 0-1.75z"/>
+        </svg>
+      </div>
+      <div class="card-text">
+        <div class="card-title">Instagram</div>
+        <div class="card-sub">@lcio_untirta</div>
+      </div>
+      <div class="arrow" aria-hidden="true">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 8h10M9 4l4 4-4 4"/>
+        </svg>
+      </div>
+    </a>
+
+    <a class="link-card" href="https://www.tiktok.com/@languagecenter_untirta" target="_blank" rel="noopener noreferrer" id="link-tiktok">
+      <div class="icon-wrap" aria-hidden="true">
+        <!-- TikTok icon -->
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V9.41a8.16 8.16 0 0 0 4.77 1.52V7.49a4.85 4.85 0 0 1-1-.8z"/>
+        </svg>
+      </div>
+      <div class="card-text">
+        <div class="card-title">TikTok</div>
+        <div class="card-sub">@languagecenter_untirta</div>
+      </div>
+      <div class="arrow" aria-hidden="true">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 8h10M9 4l4 4-4 4"/>
+        </svg>
+      </div>
+    </a>
+
+    <!-- Section: Program TOEFL -->
+    <span class="section-label">Program TOEFL</span>
+
+    <a class="link-card accent" href="https://forms.gle/py7EjJJV3YZnWKzJ7" target="_blank" rel="noopener noreferrer" id="link-toefl-camp">
+      <div class="icon-wrap" aria-hidden="true">
+        <!-- Graduation Cap / Mortarboard icon (TOEFL Camp Course) -->
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/>
+        </svg>
+      </div>
+      <div class="card-text">
+        <div class="card-title">TOEFL Camp</div>
+        <div class="card-sub">Daftar program intensif persiapan TOEFL</div>
+      </div>
+      <div class="arrow" aria-hidden="true">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 8h10M9 4l4 4-4 4"/>
+        </svg>
+      </div>
+    </a>
+
+    <a class="link-card accent" href="https://forms.gle/crYgMRdDpqRTrxDK9" target="_blank" rel="noopener noreferrer" id="link-toefl-waiver">
+      <div class="icon-wrap" aria-hidden="true">
+        <!-- Certificate / Diploma Icon (TOEFL Waiver) -->
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm3 12H9v-1c0-1 2-2 3-2s3 1 3 2v1z"/>
+        </svg>
+      </div>
+      <div class="card-text">
+        <div class="card-title">TOEFL Waiver</div>
+        <div class="card-sub">Pengajuan pembebasan biaya tes TOEFL</div>
+      </div>
+      <div class="arrow" aria-hidden="true">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 8h10M9 4l4 4-4 4"/>
+        </svg>
+      </div>
+    </a>
+
+    <a class="link-card accent" href="https://docs.google.com/forms/d/e/1FAIpQLSdz5Ho9ZBrwutT_ByGlT9SY8zGz5HBSdqaGW8x_vz2oilTyXQ/viewform" target="_blank" rel="noopener noreferrer" id="link-toefl-prep">
+      <div class="icon-wrap" aria-hidden="true">
+        <!-- Presentation / Chalkboard Classroom Icon (TOEFL Preparation Class) -->
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M19 2H5c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h6v2.18l-3.2 2.4.6 1.42L12 20.33l3.6 1.67.6-1.42L13 18.18V16h6c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 12H5V4h14v10z"/>
+        </svg>
+      </div>
+      <div class="card-text">
+        <div class="card-title">TOEFL Preparation</div>
+        <div class="card-sub">Formulir pendaftaran kelas persiapan</div>
+      </div>
+      <div class="arrow" aria-hidden="true">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 8h10M9 4l4 4-4 4"/>
+        </svg>
+      </div>
+    </a>
+
+    <!-- Footer -->
+    <p class="footer">
+      &copy; 2025 Language Center &amp; International Office<br>
+      Universitas Sultan Ageng Tirtayasa
+    </p>
+
+  </main>
+
+  <script>
+    // Ripple effect on click
+    document.querySelectorAll('.link-card').forEach(card => {
+      card.addEventListener('click', function (e) {
+        const rect = this.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const size = Math.max(rect.width, rect.height);
+
+        const ripple = document.createElement('span');
+        ripple.classList.add('ripple');
+        ripple.style.cssText = `
+          width: ${size}px;
+          height: ${size}px;
+          left: ${x - size / 2}px;
+          top: ${y - size / 2}px;
+        `;
+        this.appendChild(ripple);
+        ripple.addEventListener('animationend', () => ripple.remove());
+      });
+    });
+  </script>
+</body>
+</html>
