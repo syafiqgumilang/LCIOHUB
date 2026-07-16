@@ -130,13 +130,19 @@
       margin: 0 auto 18px;
       box-shadow: 0 0 0 6px rgba(93,224,230,0.12);
       transition: box-shadow 0.3s ease;
+      overflow: hidden;
+      padding: 10px;
     }
 
     .logo-ring:hover {
       box-shadow: 0 0 0 10px rgba(93,224,230,0.22);
     }
 
-    .logo-ring svg { width: 50px; height: 50px; }
+    .logo-ring img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
 
     .header h1 {
       font-family: 'Poppins', sans-serif;
@@ -347,15 +353,8 @@
 
     <!-- Header -->
     <div class="header">
-      <div class="logo-ring" aria-hidden="true">
-        <!-- Globe / language center icon -->
-        <svg viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="25" cy="25" r="20" stroke="#5de0e6" stroke-width="2"/>
-          <ellipse cx="25" cy="25" rx="9" ry="20" stroke="#5de0e6" stroke-width="1.5"/>
-          <line x1="5" y1="25" x2="45" y2="25" stroke="#5de0e6" stroke-width="1.5"/>
-          <line x1="8" y1="16" x2="42" y2="16" stroke="#5de0e6" stroke-width="1"/>
-          <line x1="8" y1="34" x2="42" y2="34" stroke="#5de0e6" stroke-width="1"/>
-        </svg>
+      <div class="logo-ring">
+        <img src="logo.png" alt="LCIO Logo" />
       </div>
       <h1>LCIO<span>HUB</span></h1>
       <p>Language Center &amp; International Office — Untirta</p>
