@@ -211,21 +211,49 @@
       overflow: hidden;
     }
 
-    /* shimmer on hover */
+    /* Idle & hover shimmer animation */
+    @keyframes idleShimmer {
+      0% {
+        transform: translateX(-100%);
+      }
+      12% {
+        transform: translateX(100%);
+      }
+      100% {
+        transform: translateX(100%);
+      }
+    }
+
     .link-card::before {
       content: '';
       position: absolute;
       inset: 0;
       background: linear-gradient(120deg,
         transparent 0%,
-        rgba(255,255,255,0.06) 40%,
-        transparent 60%
+        rgba(255,255,255,0.15) 35%,
+        rgba(93,224,230,0.3) 50%,
+        rgba(255,255,255,0.15) 65%,
+        transparent 100%
       );
       transform: translateX(-100%);
-      transition: transform 0.5s ease;
+      animation: idleShimmer 10.5s infinite cubic-bezier(0.4, 0, 0.2, 1);
+      pointer-events: none;
     }
 
-    .link-card:hover::before { transform: translateX(100%); }
+    /* Stagger delays for sequential idle shimmer */
+    a.link-card:nth-of-type(1)::before { animation-delay: 0s; }
+    a.link-card:nth-of-type(2)::before { animation-delay: 1.5s; }
+    a.link-card:nth-of-type(3)::before { animation-delay: 3s; }
+    a.link-card:nth-of-type(4)::before { animation-delay: 4.5s; }
+    a.link-card:nth-of-type(5)::before { animation-delay: 6s; }
+    a.link-card:nth-of-type(6)::before { animation-delay: 7.5s; }
+    a.link-card:nth-of-type(7)::before { animation-delay: 9s; }
+
+    .link-card:hover::before {
+      animation: none;
+      transform: translateX(100%);
+      transition: transform 0.5s ease;
+    }
 
     .link-card:hover {
       background: rgba(255,255,255,0.13);
