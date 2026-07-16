@@ -104,14 +104,14 @@
     .bg-watermark {
       position: fixed;
       top: 50%;
-      right: -4vw;
-      transform: translateY(-50%);
-      width: 48vw;
-      max-width: 640px;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 50vw;
+      max-width: 600px;
       min-width: 320px;
       pointer-events: none;
       z-index: 0;
-      opacity: 0.08;
+      opacity: 0.07;
       filter: drop-shadow(0 0 35px rgba(0, 0, 0, 0.5));
       animation: watermarkFloat 24s ease-in-out infinite alternate;
       user-select: none;
@@ -125,20 +125,20 @@
 
     @keyframes watermarkFloat {
       0% {
-        transform: translateY(-50%) rotate(0deg) scale(1);
+        transform: translate(-50%, -50%) rotate(0deg) scale(1);
       }
       50% {
-        transform: translateY(-53%) rotate(2deg) scale(1.03);
+        transform: translate(-50%, -52%) rotate(2deg) scale(1.03);
       }
       100% {
-        transform: translateY(-47%) rotate(-1.5deg) scale(0.97);
+        transform: translate(-50%, -48%) rotate(-1.5deg) scale(0.97);
       }
     }
 
     @media (max-width: 768px) {
       .bg-watermark {
-        right: -15vw;
-        width: 75vw;
+        left: 50%;
+        width: 85vw;
         opacity: 0.05;
       }
     }
